@@ -1,0 +1,18 @@
+[Unit]
+Description=Custom VNC startup
+After=network.target graphical.target
+Wants=graphical.target
+
+[Service]
+Type=forking
+User=yuji
+WorkingDirectory=/home/yuji
+Environment=USER=yuji
+Environment=HOME=/home/yuji
+ExecStart=/usr/bin/vncserver :10 -localhost no
+ExecStop=/usr/bin/vncserver -kill :10
+PIDFile=/home/yuji/.vnc/yuji-MS-7C95:10.pid
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
